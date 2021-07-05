@@ -1,0 +1,65 @@
+		{% extends 'fo/common/base-fo.html.twig' %}
+
+
+        {% block title %} {{ parent() }} Contact {% endblock %}
+
+{% block body %}
+        <div id="body">
+			<div class="header">
+				<div class="contact">
+					<h1>Contact</h1>
+					<h2>Envoyer-nous un message pour pouvoir POSTULER un offre</h2>
+                    {{ form_start(contactForm, {'method': 'POST',
+                                                 'type' : 'submit',
+                                                 'attr' : {'class':'form-horizontal form-bordered', 'id':'form-category', 'enctype':'multipart/form-data'}
+                                                 }
+                        )}}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="inputPassword">Nom</label>
+                                {{form_widget(contactForm.name,{'attr':{
+                                                            'class':"form-control",
+                                                            'placeholder':"nom"
+                                                        }
+
+                                                        })}}
+                            
+                                {{form_widget(contactForm.email,{'attr':{
+                                                            'class':"form-control",
+                                                            'placeholder':"EMAIL"
+                                                        }
+
+                                                        })}}
+                                {{form_widget(contactForm.contact,{'attr':{
+                                                            'class':"form-control",
+                                                            'placeholder':"CONTACT"
+                                                        }
+
+                                                        })}}
+                                {{form_widget(contactForm.subject,{'attr':{
+                                                            'class':"form-control",
+                                                            'placeholder':"Sujet"
+                                                        }
+
+                                                        })}}
+                            
+                                {{form_widget(contactForm.message,{'attr':{
+                                                            'class':"form-control",
+                                                            'placeholder':"message"
+                                                        }
+
+                                                        })}}
+				    </div>
+                    
+                    <input type="submit" value="envoyer" id="submit">
+
+                    {{ form_rest(contactForm) }}
+	                {{ form_end(contactForm) }}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+
+
+	

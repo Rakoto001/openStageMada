@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}MADASTAGE {% endblock %}</title>
+	{% block stylesheet %}
+
+	<link rel="stylesheet" href= "{{ asset("fo/css/style.css") }}" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{{asset("fo/css/mobile.css")}}">
+	
+	{% endblock %}
+
+
+	{% block javascript %}
+
+	<script src='{{ asset("fo/js/mobile.js") }}' type="text/javascript"></script>
+	<script>
+            {% for flashMessage in app.flashes('success') %}
+                        {{ flashMessage }}
+                
+            {% endfor %}
+            {% for key, flashMessage in app.session.flashbag.get('error') %}
+                new PNotify({
+                    title: 'Notification',
+                    type: 'error',
+                    text: "{{ flashMessage }}",
+                    animation: "fade",
+                    delay: 6000,
+                });
+            {% endfor %}
+        </script>
+	{% endblock %}
+
+</head>
+<body>
+	<div id="page">
+	
+        {% include "fo/common/header-fo.html.twig" %}
+
+	{% block body %}
+	{% endblock %}
+
+		<div id="footer">
+
+        {% include "fo/common/footer-fo.html.twig" %}
+			
+		</div>
+		
+
+
+	</div>
+</body>
+</html>

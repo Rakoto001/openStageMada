@@ -1,0 +1,149 @@
+{% extends 'bo/base-bo.html.twig' %}
+{% block bodyClass %}fixed
+{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Annonce : Création
+{% endblock %}
+{% set menuUser = true %}
+{% set menuUserCreat = true %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('bo/assets/vendor/select2/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('bo/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css')}}"/>
+{% endblock %}
+
+{% block body %}
+<header class="page-header">
+        <h2>Annonce</h2>
+
+        <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                        <li>
+                                <a href="{{ path('home_bo')}}">
+                                        <i class="fa fa-home"></i>
+                                </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                    <span>Utilisateur</span>
+                            </a>
+                        </li>
+                        <li><span>Création</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+	{{ form_start(annonceForm,{'method': 'POST', 'type':'submit', 'attr' : {'class' : 'form-horizontal form-bordered', 'id' : 'form-user' , 'enctype':'multipart/form-data'}}) }}
+	<div class="col-lg-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="fa fa-caret-down"></a>
+					<a href="#" class="fa fa-times"></a>
+				</div>
+
+
+				<h2 class="panel-title">
+					{% if isEdit == true %}
+						Edition
+					{% else %}
+						Nouvelle Annonce
+					{% endif %}
+				</h2>
+			</header>
+			<div class="panel-body">
+			<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Licence de l'entreprise</label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.licence,{'attr':{
+                                                    		'class':"form-control",
+                                                   		    'placeholder':"Licence"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPlaceholder">Titre</label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.Title,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"Titre"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Description</label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.Description,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"Introduction"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Contenu</label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.Content,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"Contenu"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Category</label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.category,{'attr':{
+                                                    		'class':"form-control",
+                                                   		    'placeholder':"Contenu"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+
+
+
+				<div class="form-group">
+
+					<label class="col-md-3 control-label" for="inputDefault">Image de couverture de l'annonce</label>
+					<div class="col-md-6">
+						<div class="wrapper-image dropzone-zone-file" id="images">
+							{% if isEdit == true and coverAnnonceImage != '' %}
+								<div class="col-md-6">
+									<img src="/uploads/cover/{{coverAnnonceImage}}" alt="coverAnnonce" width="150">
+								</div>
+							{% endif %}
+							<input id="dropzone-file" type="file" name="coverImage" accept="image/*" class="dropzone-file {#d-none#}" style="display: block"/>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword"></label>
+					<div class="col-md-6">
+						<button type="submit">Enregistrer</button>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+
+	</div>
+	{{ form_rest(annonceForm) }}
+	{{ form_end(annonceForm) }}
+
+{% endblock %}

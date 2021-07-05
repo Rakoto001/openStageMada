@@ -1,0 +1,70 @@
+{% extends 'bo/base-bo.html.twig' %}
+{% block bodyClass %}fixed{% endblock %}
+{% block title %} {{ parent() }} Home{% endblock %}
+{% block metaKeywords %}Home{% endblock %}
+{% block metaDescription %}Home{% endblock %}
+{% block metaAuthor %}Home{% endblock %}
+{% block body %}
+    
+    <header class="page-header">
+            <h2>Home</h2>
+
+            <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                    <li>
+                        <a href="{{ path('home_bo')}}">
+                                <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+            </div>
+    </header>
+    <div class="row">
+        <div class="col-md-12">
+            
+
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                        <a href="#" class="fa fa-caret-down"></a>
+                        <a href="#" class="fa fa-times"></a>
+                    </div>
+                   {# {% set role = 'SUPER_ADMIN' %}
+                    {% set roleSuperAdmin = 'SUPER_ADMIN' %}
+                    {% set roles = app.user.roles %}#}
+                    
+                    <h2 class="panel-title">Paragraphs {#% if roleSuperAdmin in roles %} Admin {% else %} simple utilisateur {% endif %#}</h2>
+                    <p class="panel-subtitle">Make a paragraph stand out by adding lead class, and check out the alternative font style.</p>
+                </header>
+                <div class="panel-body">
+                    <p class="lead">Mauris aliquet ultricies ante, non <span class="word-rotate" data-plugin-options='{ "delay": 3000 }'><span class="word-rotate-items"><span>lorem</span>
+                                <span>ipsum</span><span>dolor</span></span></span>. Sed ultrices pellentesque purus, vulputate.</p>
+                    <p class="lead">Check the <span class="alternative-font">alternative</span> font style.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a adipiscing lectus. Aenean fermentum mauris erat, quis accumsan eros facilisis sed. Nullam convallis arcu nec imperdiet pharetra. Suspendisse sed pharetra orci. Integer elementum augue sed dui sollicitudin, eu molestie leo rutrum. Vestibulum sit amet ullamcorper nunc.</p>
+                    <p>Mauris aliquet <span class="highlight">ultricies</span> non faucibus ante gravida sed. Sed ultrices pellentesque purus, vulputate.</p>
+                    <p>Check the <span class="alternative-font">alternative</span> font style.</p>
+                    <p>Porto Admin is
+                        <span class="word-rotate highlight">
+                            <span class="word-rotate-items">
+                                <span>incredibly</span>
+                                <span>especially</span>
+                                <span>extremely</span>
+                            </span>
+                        </span>
+                        beautiful and fully responsive.
+                    </p>
+                </div>
+            </section>
+
+            
+        </div>
+        
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src='{{ asset('bo/assets/javascripts/dashboard/examples.dashboard.js') }}'></script>
+{% endblock %}

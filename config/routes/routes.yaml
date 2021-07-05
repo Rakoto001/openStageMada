@@ -1,0 +1,155 @@
+annonce_new:
+    path: /annonce/new
+    controller: App\Controller\Annonce\AnnonceController::new
+
+annonce_edit:
+    path: /admin/annonce/edit
+    controller: App\Controller\Annonce\AnnonceController::edit
+
+annonce_list:
+    path: /admin/annonce/list
+    controller: App\Controller\Annonce\AnnonceController::list
+
+annonce_ajax_list:
+    path: /admin/annonce/annonce-ajax-list
+    controller: App\Controller\Annonce\AnnonceAjaxController::listAnnonceTable
+
+annonce_ajax_delete:
+    path: /admin/annonce/annonce-ajax-delete
+    controller: App\Controller\Annonce\AnnonceAjaxController::deleteAnnonce
+
+annonce_export_csv:
+    path: /admin/annonce/export
+    controller: App\Controller\Annonce\AnnonceController::exportAnnonceToCsv
+
+home_bo:
+    path: /index
+    controller: App\Controller\MainController::index
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+app_logout:
+    path: /admin/logout
+    controller: App\Controller\SecurityController::logout
+
+user_register:
+    path: /admin/user/register
+    controller: App\Controller\User\UserController::register
+
+user_list:
+    path: /admin/user/list
+    controller: App\Controller\User\UserController::listUser
+
+user_edit:
+    path: /admin/user/edit
+    controller: App\Controller\User\UserController::edit
+
+user_ajax_list:
+    path: /admin/user/data_table_list
+    controller: App\Controller\User\UserAjaxController::userList
+
+user_ajax_delete:
+    path: /admin/user/data_table_delete
+    controller: App\Controller\User\UserAjaxController::delete
+    
+user_avatar_ajax_delete:
+    path: /admin/user/avatar
+    controller: App\Controller\User\UserAjaxController::deleteAvatar
+
+user_default_admin:
+    path: /admin/user/new/default-admin
+    controller: App\Controller\User\UserController::generateAdmin
+
+list_category:
+    path: /admin/category/list
+    controller: App\Controller\Category\CategoryController::listCategory
+
+category_ajax_list:
+    path: /admin/category/category-ajax-list
+    controller: App\Controller\Category\CategoryAjaxController::listCategoryTable
+
+category_new:
+    path: /admin/category/new
+    controller: App\Controller\Category\CategoryController::new
+
+category_edit:
+    path: /admin/category/edit
+    controller: App\Controller\Category\CategoryController::editCategory
+
+delete_category:
+    path: /admin/category/delete
+    controller: App\Controller\Category\CategoryAjaxController::deleteCategory
+
+licence_list:
+    path: /admin/licence/list
+    controller: App\Controller\Licence\LicenceController::listLicence
+
+licence_ajax_list:
+    path: /admin/licence/licence-ajax-list
+    controller: App\Controller\Licence\LicenceAjaxController::listLicenceTable
+
+licence_new:
+    path: /admin/licence/new
+    controller: App\Controller\Licence\LicenceController::new
+
+licence_edit:
+    path: /admin/licence/edit
+    controller: App\Controller\Licence\LicenceController::editLicence
+
+delete_licence:
+    path: /admin/licence/delete
+    controller: App\Controller\Licence\LicenceAjaxController::deleteLicence
+
+stagiaire_new:
+    path: /stagiaire/new
+    controller: App\Controller\Stagiaire\StagiaireController::newStagiaire    
+
+provider_new:
+    path: /admin/provider/new
+    controller: App\Controller\Provider\ProviderController::new
+
+provider_list:
+    path: /admin/provider/list
+    controller: App\Controller\Provider\ProviderController::listProvider
+
+provider_ajax_list:
+    path: /admin/provider/provider-ajax-list
+    controller: App\Controller\Provider\ProviderAjaxController::listProviderTable
+ 
+provider_edit:
+    path: /admin/provider/edit
+    controller: App\Controller\Provider\ProviderController::editProvider
+
+delete_provider:
+    path: /admin/provider/delete
+    controller: App\Controller\Provider\ProviderAjaxController::deleteProvider
+
+main_front:
+    path: /front
+    controller: App\Controller\Front\MainController::index  
+
+front_list_category:
+    path: /category/list
+    controller: App\Controller\Front\AnnonceController::listAnnonceByCategory  
+
+front_details_annonce:
+    path: /annonce/details
+    controller: App\Controller\Front\AnnonceController::annonceDetails
+  
+front_annonce_list:
+    path: /annonce/list
+    controller: App\Controller\Front\AnnonceController::annonceList
+
+front_annonce_contact:
+    path: /annonce/contact
+    controller: App\Controller\Front\ContactController::contactAdmin
+    
+front_list_provider:
+    path: /provider/list
+    controller: App\Controller\Front\ProviderController::listProvider
+
+front_list_provider_annonce:
+    path: /provider/annonce/list
+    controller: App\Controller\Front\ProviderController::listAnnonceByProvider

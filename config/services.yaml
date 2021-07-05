@@ -1,0 +1,86 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    from_email_address:      '%env(FROM_EMAIL_ADDRESS)%'
+    uploads_annonce_cover: 'cover'
+    uploads_user_avatar: 'bo/user'
+    uploads_category_image: 'bo/category'
+    uploads_document_file: 'document'
+    uploads_provider_image: 'bo/provider'
+    base_url: '%env(BASE_URL)%'
+    convert_file_to_pdf_secret_key: '%env(CONVERT_FILE_TO_PDF_SECRET_KEY)%'
+    convert_file_to_pdf_secret_token: '%env(CONVERT_FILE_TO_PDF_SECRET_TOKEN)%'
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+    
+    # Annonce service
+    annonce.service:
+        class: App\Services\AnnonceService
+        autowire: true
+        public: true
+
+  # native service
+    native.upload.service:
+        class: App\Services\NativeUploaderService
+        autowire: true
+        public: true
+    
+    # User service
+    user.service:
+        class: App\Services\UserService
+        autowire: true
+        public: true
+
+    #categoryService    
+    category.service:
+        class: App\Services\CategorieService
+        autowire: true
+        public: true
+    
+    #LicenceService    
+    licence.service:
+        class: App\Services\LicenceService
+        autowire: true
+        public: true
+    
+    #stagiaire.service
+    stagiaire.service:
+        class: App\Services\StagiaireService
+        autowire: true
+        public: true
+
+    #MailerService
+    mailer.service:
+        class: App\Services\MailerService
+        autowire: true
+        public: true
+    
+    provider.service:
+        class: App\Services\ProviderService
+        autowire: true
+        public: true

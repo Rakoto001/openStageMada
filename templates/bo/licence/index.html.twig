@@ -1,0 +1,138 @@
+{% extends 'bo/base-bo.html.twig' %}
+
+
+{% block bodyClass %}fixed
+{% endblock %}
+{% block title %}
+	{{ parent() }}
+	- Licence : Création
+{% endblock %}
+{% set menuUser = true %}
+{% set menuUserCreat = true %}
+
+{% block body %}
+<header class="page-header">
+        <h2>Utilisateur</h2>
+
+        <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                        <li>
+                                <a href="{{ path('home_bo')}}">
+                                        <i class="fa fa-home"></i>
+                                </a>
+                        </li>
+                       
+                        <li><span> {% if isEdit == true %} Edition {% else %} Création {% endif %}</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+	{{ form_start(licenceForm,{'method': 'POST', 'type':'submit', 'attr' : {'class' : 'form-horizontal form-bordered', 'id' : 'form-licence' , 'enctype':'multipart/form-data'}}) }}
+	<div class="col-lg-12">
+		<section class="panel">
+			<header class="panel-heading">
+				<div class="panel-actions">
+					<a href="#" class="fa fa-caret-down"></a>
+					<a href="#" class="fa fa-times"></a>
+				</div>
+
+
+				<h2 class="panel-title">
+					{#% if isEdit == true %}
+						Edition
+					{% else %}
+						Nouvelle Annonce
+					{% endif %#}
+				</h2>
+			</header>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPlaceholder">Nom</label>
+					<div class="col-md-6">
+						{{form_widget(licenceForm.name,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"name"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Contenu</label>
+					<div class="col-md-6">
+						{{form_widget(licenceForm.content,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"content"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Statut</label>
+					<div class="col-md-6">
+						{{form_widget(licenceForm.status,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"status"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword">Url officiel</label>
+					<div class="col-md-6">
+						{{form_widget(licenceForm.urlOfficial,{'attr':{
+                                                     'class':"form-control",
+                                                     'placeholder':"status"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+         	
+
+			
+					
+
+					{#{% if isEdit == true and userAvatar != '' %}
+								<div  class="form-group" id='user-{{ user.id }}'> 
+									<img src="/uploads/bo/user/{{userAvatar}}" alt="coverAnnonce" width="150">
+            						<a href="javascript:;"class="btn btn-danger btn-delete-avatar" ajax-url-delete-avatar="{{ path('user_avatar_ajax_delete') }}" data-id="{{ user.id }}">Supprimer</a>
+								</div>
+					{% endif %}#}
+				
+
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPassword"></label>
+					<div class="col-md-6">
+						<button type="submit">Enregistrer</button>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+
+	</div>
+	{{ form_rest(licenceForm) }}
+	{{ form_end(licenceForm) }}
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+	 <script src="{{asset('bo/js/dropzone-file.js')}}"></script>
+    <script>
+        var action = "edit";
+    </script>
+    <script src="{{asset('bo/assets/vendor/select2/select2.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables/media/js/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables-bs3/assets/js/datatables.js')}}"></script>
+    <script src="{{asset('bo/js/licence.js')}}"></script>
+{% endblock %}

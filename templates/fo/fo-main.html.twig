@@ -1,0 +1,94 @@
+{% extends 'fo/common/base-fo.html.twig' %}
+{% block title %} {{ parent() }}{% endblock %}
+
+{% block body %}
+		<div id="body" class="home">
+			<div class="header">
+				<div>
+					<img src="fo/images/satellite.png" alt="" class="satellite">
+					<h1>M-STAGE</h1>
+					<h2>OFFRE DE STAGE MADAGASCAR</h2>
+					<a href="blog.html" class="more">Read More</a>
+					<h3>CATEGORIES</h3>
+					<ul>
+					{% for listCategorie in listCategories %}
+					{% set name = listCategorie.name %}
+					{% set imageCategory = listCategorie.image %}
+					{% set id = listCategorie.id %}
+					{% set nbAnnonces = listCategorie.nbAnnonce %}
+
+						<li>
+							<a href="{{ path('front_list_category',{ 'id': id}) }}"  class="box" >
+
+							<img src="/uploads/bo/category/{{ imageCategory }}"
+								 with='150'
+							     height='150'
+								 title="A T-Rex on display in the Manchester University Museum" 
+								 alt="" 
+								 > 
+							</a>
+							<span style="color : white"> {{ name }} ({{ nbAnnonces }}) </span>
+
+
+						</li>
+
+					{% endfor %}
+
+						
+					</ul>
+				</div>
+			</div>
+			<div class="body">
+				<div>
+					<h1>NOTRE MISSION</h1>
+					<p>Fixer au départ les intentions des étudiants ou des nouveaux diplomés a s'orienter vers leur furur emplois et de les conduire a s'auto-proféssionnaliser dans leurs métiers d'avenir.</p>
+				</div>
+			</div>
+			<div class="footer">
+				<div>
+					<ul>
+						<li>
+							<h1>FEATURED VIDEO</h1>
+							<a href="blog.html"><img src="fo/images/mars-rover.jpg" alt=""><span></span></a>
+						</li>
+						<li>
+							<h1>OFFRES RECENTS</h1>
+							<ul>
+
+							{% for listAnnonce in listAnnonces %}
+							{% set title = listAnnonce.title %}
+							{% set creationDate = listAnnonce.created_at %}
+							{% set id = listAnnonce.id %}
+							{% set image = listAnnonce.cover_image %}
+
+
+								<li>
+									<a href="blog.html">
+									<img src="/uploads/cover/{{ image }}" 
+					  				 	 alt=""
+										 with='50'
+										 height='50'>
+									</a>
+									<h1>{{ title[:20] ~ '...' }}</h1>
+									<span>{{ creationDate|date("d M Y'") }} </span>
+									<a href="{{ path('front_details_annonce', {'id':id}) }}" class="more">Détails</a>
+								</li>
+
+							{% endfor %}
+
+								
+							</ul>
+
+							<ul> 
+								<li> <a href="{{ path('front_annonce_list') }}" class="more">Voir Tout</a> </li>
+							</ul>
+
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}
+
+		

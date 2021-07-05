@@ -1,0 +1,47 @@
+		{% extends 'fo/common/base-fo.html.twig' %}
+
+
+        {% block title %} {{ parent() }}{% endblock %}
+
+{% block body %}
+        <div id="body">
+			<div class="header">
+				
+
+				<div>
+					<h1>Partenaire : {#{ categoryName }#}</h1>
+					<ul>
+				{% for annonce in annonces %}
+					{% set description = annonce.description %}
+					{% set title = annonce.Title %}
+					{% set category = annonce.content %}
+					{% set coverImage = annonce.coverImage %}
+					{% set id = annonce.id %}
+						<li>
+							<a href="#"><img src="/uploads/cover/{{ coverImage }}" 
+													  alt=""
+											     	   with='200'
+							  					      height='200'
+													  ></a>
+							<div>
+								<h1>{{ title }}</h1>
+								<p>{{ description }}</p>
+								<a href="{{ path('front_details_annonce', {'id':id}) }}" class="more">Détails...</a>
+							</div>
+						</li>
+					{% endfor %}
+
+						{#<li>
+							<a href="proj1.html"><img src="fo/images/space-station.jpg" alt=""></a>
+							<div>
+								<h1>INTERTERNATIONAL SPACE STATION</h1>
+								<p>Looking for more templates? Just browse through all our Free Website Templates and find what you’re looking for. But if you don’t find any website template you can use, you can try our Free Web Design service and tell us all about it. Maybe you’re looking for something different, something special.</p>
+								<a href="proj1.html" class="more">Read More</a>
+							</div>
+						</li>#}
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

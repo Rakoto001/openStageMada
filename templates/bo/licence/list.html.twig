@@ -1,0 +1,83 @@
+{% extends 'bo/base-bo.html.twig' %}
+{% block bodyClass %}fixed{% endblock %}
+{% block title %} {{ parent() }} - Licence : Liste{% endblock %}
+{% set menuDocument = true %}
+{% set menuDocumentList = true %}
+
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('bo/assets/vendor/select2/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('bo/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css')}}"/>
+{% endblock %}
+
+{% block body %}
+    <header class="page-header">
+        <h2>Licence</h2>
+
+        <div class="right-wrapper pull-right">
+                <ol class="breadcrumbs">
+                        <li>
+                                <a href="">
+                                        <i class="fa fa-home"></i>
+                                </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                    <span>Licence</span>
+                            </a>
+                        </li>
+                        <li><span>Liste</span></li>
+                </ol>
+
+                <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
+        </div>
+    </header>
+    
+    <section class="panel">
+        <header class="panel-heading">
+           
+
+            <h2 class="panel-title">Liste</h2>
+            <div class="panel-actions">
+                <a href="{{ path('licence_new') }}">
+                                <i class="fa fa-copy" aria-hidden="true"></i>
+                                <span style="color: black">Nouveau Licence</span>
+                            </a>
+            </div>
+             
+            
+        </header>
+        <div class="panel-body">
+            <table class="table table-bordered table-striped mb-none" 
+                   id="licence-list-datatable" 
+                   page="licence" 
+                   user="" 
+                   ajax-url-permission="" 
+                   ajax-url="{{ path('licence_ajax_list') }}">
+
+                <thead>
+                    <tr>
+                        <th>Licence</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>URL</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{asset('bo/assets/vendor/select2/select2.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables/media/js/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables/extras/TableTools/js/dataTables.tableTools.min.js')}}"></script>
+    <script src="{{asset('bo/assets/vendor/jquery-datatables-bs3/assets/js/datatables.js')}}"></script>
+    <script src="{{asset('bo/js/licence.js')}}"></script>
+{% endblock %}

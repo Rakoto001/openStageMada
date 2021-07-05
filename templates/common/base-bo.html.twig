@@ -1,0 +1,166 @@
+<!doctype html>
+<html class="{% block bodyClass %}{% endblock %}">
+
+<head>
+
+	<!-- Basic -->
+	<meta charset="UTF-8">
+
+	<title>{% block title %}MADASTAGE {% endblock %}</title>
+	<meta name="keywords" content="{% block metaKeywords %}{% endblock %}" />
+	<meta name="description" content="{% block metaDescription %}{% endblock %}">
+	<meta name="author" content="{% block metaAuthor %}{% endblock %}">
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	{% block stylesheet %}
+	<!-- Web Fonts  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light"
+		rel="stylesheet" type="text/css">
+
+        <!-- Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/bootstrap/css/bootstrap.css')}}" />
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/font-awesome/css/font-awesome.css')}}" />
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/magnific-popup/magnific-popup.css')}}" />
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/bootstrap-datepicker/css/datepicker3.css')}}" />
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/select2/select2.css')}}" />
+
+		<!-- Specific Page Vendor CSS -->
+		<link rel="stylesheet" href="{{asset('bo/assets/vendor/pnotify/pnotify.custom.css')}}" />
+
+		<!-- Theme CSS -->
+		<link rel="stylesheet" href="{{asset('bo/assets/stylesheets/theme.css')}}" />
+
+		<!-- Skin CSS -->
+		<link rel="stylesheet" href="{{asset('bo/assets/stylesheets/skins/default.css')}}" />
+
+		<!-- Theme Custom CSS -->
+		<link rel="stylesheet" href="{{asset('bo/assets/stylesheets/theme-custom.css')}}">
+
+		<!-- Head Libs -->
+		<script src="{{asset('bo/assets/vendor/modernizr/modernizr.js')}}"></script>
+        
+        <style>
+            .color-red{
+                color:red;
+            }
+            .color-green{
+                color:green;
+            }
+            .panel-body-modal, .panel-footer-modal{
+                position: relative ;
+            }
+            .file-clone{
+                margin-top: 5px;
+                height: 35px;
+            }
+            .file-clone input{
+                width: 95%;
+                float: left;
+                margin-right: 5px;
+            }
+            html.fixed .header {
+                z-index: 9999;
+            }
+            .page-header {
+                z-index: 9998;
+            }
+            .document-file-progress-bar {
+                background: red;
+                display: block;
+                height: 20px;
+                text-align: center;
+                transition: width .3s;
+                width: 0;
+              }
+        </style>
+	{% endblock %}
+
+
+</head>
+
+<body>
+	<section class="body">
+
+		{% include "common/header.html.twig" %}
+
+		<div class="inner-wrapper">
+
+			{% include "common/left-sidebar.html.twig" %}
+			<!-- end: sidebar -->
+
+			<section role="main" class="content-body">
+				
+
+				{% block body %}
+
+				{% endblock %}
+
+				<!-- end: page -->
+			</section>
+		</div>
+
+		<aside id="sidebar-right" class="sidebar-right">
+			{% include "common/right-sidebar.html.twig" %}
+		</aside>
+	</section>
+        {% include "common/modals.html.twig" %}
+
+                
+        
+	{% block javascript %}
+	
+        
+        
+        <script src="{{ asset('bo/assets/vendor/jquery/jquery.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/bootstrap/js/bootstrap.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/nanoscroller/nanoscroller.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/magnific-popup/magnific-popup.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/jquery-placeholder/jquery.placeholder.js')}}"></script>
+        <script src="{{ asset('bo/assets/vendor/select2/select2.js')}}"></script>
+        
+        <!-- Specific Page Vendor -->
+        <script src="{{ asset('bo/assets/vendor/pnotify/pnotify.custom.js')}}"></script>
+
+        <!-- Theme Base, Components and Settings -->
+        <script src="{{ asset('bo/assets/javascripts/theme.js')}}"></script>
+
+        <!-- Theme Custom -->
+        <script src="{{ asset('bo/assets/javascripts/theme.custom.js')}}"></script>
+
+        <!-- Theme Initialization Files -->
+        <script src="{{ asset('bo/assets/javascripts/theme.init.js')}}"></script>
+
+
+        <!-- Examples -->
+        <script src="{{ asset('bo/assets/javascripts/ui-elements/examples.modals.js')}}"></script>
+        
+        <script>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                new PNotify({
+                    title: 'Notification',
+                    type: 'success',
+                    text: "{{ flashMessage }}",
+                    animation: "fade",
+                    delay: 6000,
+                });
+            {% endfor %}
+            {% for key, flashMessage in app.session.flashbag.get('error') %}
+                new PNotify({
+                    title: 'Notification',
+                    type: 'error',
+                    text: "{{ flashMessage }}",
+                    animation: "fade",
+                    delay: 6000,
+                });
+            {% endfor %}
+        </script>
+	{% endblock %}
+
+        
+</body>
+
+</html>

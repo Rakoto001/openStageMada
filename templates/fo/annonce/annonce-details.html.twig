@@ -1,0 +1,95 @@
+		{% extends 'fo/common/base-fo.html.twig' %}
+
+
+        {% block title %} {{ parent() }}{% endblock %}
+
+{% block body %}
+      {#<div id="body">
+	  				{% set description = annonce.description %}
+					{% set title = annonce.Title %}
+					{% set category = annonce.content %}
+					{% set coverImage = annonce.coverImage %}
+					{% set id = annonce.id %}
+			<div class="header">
+				<div>
+					<h1>{{ title }}</h1>
+					<img src="/uploads/cover/{{ coverImage }}" 
+					  	 alt=""
+						 with='200'
+						 height='200'>
+
+					<h2>{{ title }}</h2>
+					<p> {{ description }}</p>
+					<p>Looking for more templates? Just browse through all our Free Website Templates and find what you’re looking for. But if you don’t find any website template you can use, you can try our Free Web Design service and tell us all about it. Maybe you’re looking for something different, something special.</p>
+				</div>
+			</div>
+		</div>#}
+
+		<div id="body">
+					{% set description = annonce.description %}
+					{% set content = annonce.Content %}
+					{% set title = annonce.Title %}
+					{% set category = annonce.content %}
+					{% set coverImage = annonce.coverImage %}
+					{% set creationDate = annonce.createdAt %}
+					{% set id = annonce.id %}
+
+			<div class="header">
+				<div>
+					<h1>{{ title }}</h1>
+					<div class="article">
+						<img src="/uploads/cover/{{ coverImage }}" 
+					  	 alt=""
+						 with='350'
+						 height='200'>
+						<h1>{{ title }}</h1>
+						<span>{{ creationDate|date("d/m/Y") }}</span>
+						<p>{{ description }}</p>
+						<p>{{ content }}</p>
+					</div>
+					<div class="sidebar">
+					
+						<ul>
+						{% for recentAnnonce in recentAnnonces %}
+					{% set title = recentAnnonce.title %}
+					{% set coverImage = recentAnnonce.cover_image %}
+					{% set creationDate = recentAnnonce.created_at %}
+					{% set idrecent = recentAnnonce.id %}
+
+
+							<li>
+								<h1>OFFRES RECENTS</h1>
+								<a href="{{ path('front_details_annonce', {'id': idrecent}) }}">
+								<img src="/uploads/cover/{{ coverImage }}" 
+										alt=""
+										with='100'
+										height='100'>
+								</a>
+								<h2>{{ title }}</h2>
+								<span>{{ creationDate|date('d M Y') }}</span>
+							</li>
+						{% endfor %}
+                    {{ knp_pagination_render(recentAnnonces) }}
+							
+						{#	<li>
+								<h1>RECENT POSTS</h1>
+								<ul>
+									<li>
+										<a href="blog.html"><img src="images/alien-life.jpg" alt=""></a>
+										<h2>ALIEN LIFE</h2>
+										<span>FEBRUARY 3, 2023</span>
+									</li>
+									<li>
+										<a href="blog.html"><img src="images/galaxy.jpg" alt=""></a>
+										<h2>THE GALAXY</h2>
+										<span>FEBRUARY 1, 2023</span>
+									</li>
+								</ul>
+							</li>#}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

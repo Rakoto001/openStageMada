@@ -1,0 +1,61 @@
+		{% extends 'fo/common/base-fo.html.twig' %}
+
+
+        {% block title %} {{ parent() }}{% endblock %}
+
+		{% block body %}
+   		<div id="body">
+			<div class="header">
+			{{ dump(providers) }}
+				<div>
+					<h1>Liste de nos partenaires</h1>
+					<div class="article">
+						<ul>
+						{% for provider in providers %}
+
+							{% set nbAnnonce = provider.nbAnnonce %}
+							{% set name = provider.name %}
+							{% set logo = provider.image %}
+							{% set id = provider.id %}
+
+							<li>
+								<a href="{{ path('front_list_provider_annonce', {'id': id}) }}"><img src="/uploads/bo/provider/{{logo}}" alt=""></a>
+								<h1> {{ name }}</h1>
+								<span>FEBRUARY 6, 2023</span>
+								<p>This website template has been designed by Free Website Templates for you, for free. You can replace all this text with your own text.</p>
+								<a href="{{ path('front_list_provider_annonce', {'id': id}) }}" class="more">Read More</a>
+							</li>
+
+							{% endfor %}
+						</ul>
+					</div>
+				{#	<div class="sidebar">
+						<ul>
+							<li>
+								<h1>FEATURED POSTS</h1>
+								<a href="singlepost.html"><img src="images/moon-satellite.jpg" alt=""></a>
+								<h2>SOYUZ TMA-M</h2>
+								<span>FEBRUARY 6, 2023</span>
+							</li>
+							<li>
+								<h1>RECENT POSTS</h1>
+								<ul>
+									<li>
+										<a href="singlepost.html"><img src="images/alien-life.jpg" alt=""></a>
+										<h2>ALIEN LIFE</h2>
+										<span>FEBRUARY 3, 2023</span>
+									</li>
+									<li>
+										<a href="singlepost.html"><img src="images/galaxy.jpg" alt=""></a>
+										<h2>THE GALAXY</h2>
+										<span>FEBRUARY 1, 2023</span>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>#}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

@@ -1,0 +1,11 @@
+#swiftmailer:
+#    url: '%env(MAILER_URL)%'
+#    spool: { type: 'memory' }
+swiftmailer:
+    transport: gmail
+    auth_mode: login
+    port: 465
+    host: smtp.gmail.com
+    username: 'symfony9494@gmail.com'
+    password: 'GoogleSymfony2021'
+    spool: { type: 'memory' }
