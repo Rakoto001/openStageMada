@@ -87,7 +87,8 @@ $(document).ready(function(){
                             delay: 6000,
                         });
                         
-                        element.parent().parent().remove() ;
+                        //$('#user-'+id+'').remove() ;
+                        element.remove() ;
                     }
                 });
                 

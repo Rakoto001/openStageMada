@@ -224,28 +224,22 @@ class UserService extends BaseService{
          return  $this->removeData($user);
       }
 
+      /**
+       * delete image from uploaded image path
+       */
       public function deleteAvatar($_id)
       {
           $user = $this->findById($_id);
-         $avatarName = $user->getAvatar();
+          $avatarName = $user->getAvatar();
+          //suppresssion du fichier dans le upload
+          $avatarFilePath = $this->container->get('kernel')->getRootDir() . '/../public/uploads'."/".$this->container->getParameter('uploads_user_avatar')."/".$avatarName;
+          if( file_exists($avatarFilePath) ){
+                unlink($avatarFilePath);
+          } 
+          //suppression de l'avatar dans  la db
+           $userAvatar = $user->setAvatar('');
 
-        //suppresssion du fichier dans le upload
-        $avatarFilePath = $this->container->get('kernel')->getRootDir() . '/../public/uploads'."/".$this->container->getParameter('uploads_user_avatar')."/".$avatarName;
-        if( file_exists($avatarFilePath) ){
-
-            unlink($avatarFilePath);
-
-        } 
-        
-        //suppression de l'avatar dans  la db
-        $userAvatar = $user->setAvatar('');
-        $this->save($user);
+        return $this->save($user);
       }
-
-      
-
-      
- 
-   
 
 }
