@@ -42,7 +42,8 @@ class AnnonceAjaxController extends Controller{
     $dataAnnonces = $listAnnonces['datas'];
     $totAnnonces = $listAnnonces['count'];
 
-    $dataLists = ['data' => $dataAnnonces, 'recordsTotal' => $totAnnonces, 'recordsFiltered' => count($listAnnonces)];
+   //  /$dataLists = ['data' => $dataAnnonces, 'recordsTotal' => $totAnnonces, 'recordsFiltered' => count($listAnnonces)];
+    $dataLists = ['data' => $dataAnnonces];
      
     return new JsonResponse($dataLists) ;
  }

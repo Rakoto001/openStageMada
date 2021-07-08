@@ -27,7 +27,7 @@
                         </li>
                         <li>
                             <a href="">
-                                    <span>Utilisateur</span>
+                                    <span>Annonce</span>
                             </a>
                         </li>
                         <li><span>Création</span></li>
@@ -67,7 +67,19 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="inputPlaceholder">Titre</label>
+					<label class="col-md-3 control-label" for="inputPassword">Fournisseur * </label>
+					<div class="col-md-6">
+						{{form_widget(annonceForm.provider,{'attr':{
+                                                    		'class':"form-control",
+                                                   		    'placeholder':"Licence"
+                                                 }
+
+                                                 })}}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-3 control-label" for="inputPlaceholder">Titre * </label>
 					<div class="col-md-6">
 						{{form_widget(annonceForm.Title,{'attr':{
                                                      'class':"form-control",
@@ -90,7 +102,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="inputPassword">Contenu</label>
+					<label class="col-md-3 control-label" for="inputPassword">Contenu * </label>
 					<div class="col-md-6">
 						{{form_widget(annonceForm.Content,{'attr':{
                                                      'class':"form-control",
@@ -117,7 +129,7 @@
 
 				<div class="form-group">
 
-					<label class="col-md-3 control-label" for="inputDefault">Image de couverture de l'annonce</label>
+					<label class="col-md-3 control-label" for="inputDefault">Image de couverture de l'annonce * </label>
 					<div class="col-md-6">
 						<div class="wrapper-image dropzone-zone-file" id="images">
 							{% if isEdit == true and coverAnnonceImage != '' %}

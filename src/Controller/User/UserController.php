@@ -123,7 +123,6 @@ class UserController extends controller{
     {
         $userService = $this->container->get('user.service');
         $userService->defaultUserRegistration();
-
         $this->addFlash('success', 'Admin genéré avec succès');
 
         return $this->redirectToRoute('app_login');

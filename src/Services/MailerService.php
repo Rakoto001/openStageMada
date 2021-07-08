@@ -5,6 +5,7 @@ use router;
 use Swift_Mailer;
 
 use App\Services\BaseService;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -27,6 +28,7 @@ class MailerService{
     $datas = $_paramsMail['datas'];
     $template = $_paramsMail['template'];
     $contentBody = $this->templating->render($template, $datas) ;
+    // $pdf = $_paramsMail['pdf'];
     
     $message = (new \Swift_Message('Nouvelle Annonce'))
             ->setFrom($mailUser)
@@ -34,8 +36,21 @@ class MailerService{
             ->setSubject($subject)
             
             ->setBody($contentBody)
+            // ->attach($pdf)
         ;
- 
+//     $message = (new TemplatedEmail())
+//     ->from($mailUser)
+//     ->to(new Address('ryan@example.com'))
+//     ->subject($subject)
+//     // path of the Twig template to render
+//     ->htmlTemplate($template)
+
+//     // pass variables (name => value) to the template
+//     ->context([
+//         'expiration_date' => new \DateTime('+7 days'),
+//         'username' => 'foo',
+//     ])
+// ;
     $this->mailer->send($message);
     
 

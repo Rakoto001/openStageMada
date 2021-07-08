@@ -92,6 +92,21 @@ class ProviderRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     * get all Provider by status
+     */
+    public function getAllByStatus()
+    {
+         $qb = $this->createQuery()
+                    ->andWhere('p.status = 1')
+                    ->orderBy('p.id', 'ASC')
+                    ->getQuery();
+        $results = $qb->getResult();
+
+        return $results;
+
+    }
+
     
     
     // /**

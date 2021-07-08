@@ -44,11 +44,13 @@ class StagiaireController extends Controller
             
         }
 
-        return $this->render('bo/stagiaire/index.html.twig', [
-            'stagiaireForm' => $stagiaireForm->createView(),
-            'isEdit' => $isEdit,
+        return $this->render('email/confirm-pdf.html.twig');
 
-        ]);
+        // return $this->render('bo/stagiaire/index.html.twig', [
+        //     'stagiaireForm' => $stagiaireForm->createView(),
+        //     'isEdit' => $isEdit,
+
+        // ]);
     }
 
      /**

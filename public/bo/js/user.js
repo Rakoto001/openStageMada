@@ -87,8 +87,8 @@ $(document).ready(function(){
                             delay: 6000,
                         });
                         
-                        //$('#user-'+id+'').remove() ;
-                        element.remove() ;
+                        $('#user-avatar').remove() ;
+                        // element.parent().remove() ;
                     }
                 });
                 
@@ -156,7 +156,7 @@ $(document).ready(function(){
                 url: ajaxUrl,
                 dataType: 'json',
                 data: {"id" : id},
-
+/*
                 success: function(result) {
                     new PNotify({
                         title: 'Notification',
@@ -167,9 +167,12 @@ $(document).ready(function(){
                     });
                     
                     //Suppression de la ligne à supprimer
-                    $('#user-'+id+'').remove() ;
+                    $('#user-avatar').remove() ;
                 }
+                */
             });
+            $('#user-avatar').remove() ;
+
         });
         
     }) ;

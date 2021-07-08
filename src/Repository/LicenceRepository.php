@@ -127,14 +127,12 @@ class LicenceRepository extends ServiceEntityRepository
     //  */
     public function findByStatus()
     {
-        // $query = $this->createQuery();
          $qb = $this->createQuery()
                     ->andWhere('l.status = 1')
                     ->orderBy('l.id', 'ASC')
                     ->getQuery();
-
         $results = $qb->getResult();
-        
+
         return $results;
 
     }

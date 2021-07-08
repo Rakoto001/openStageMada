@@ -179,7 +179,7 @@
 					 {% if isEdit == true%}
 
      {% if userAvatar != '' %}
-    <div class="form-group"  id='user-{{ user.id }}' >
+    <div class="form-group"  id='user-avatar' >
         <label class="col-md-3 control-label" for="inputDefault"></label>
         <div class="col-md-6">
             <img class="profile-user-img img-fluid img-circle avatar" width="200" height="200" src="{{asset("uploads/bo/user/"~userAvatar)}}"
@@ -187,7 +187,7 @@
             <a href="javascript:;"class="btn btn-danger btn-delete-avatar" ajax-url-delete-avatar="{{ path('user_avatar_ajax_delete') }}" data-id="{{ user.id }}">Supprimer</a>
 
         </div>
-    </div>
+    </di<v>
    {% endif %}
    
    {% endif %}

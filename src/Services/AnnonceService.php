@@ -5,12 +5,14 @@ namespace App\Services;
 use router;
 use Swift_Mailer;
 
+use Knp\Snappy\Pdf;
+use Twig\Environment;
 use App\Entity\Annonce;
 use App\Services\BaseService ;
 use Doctrine\ORM\Mapping\Entity;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -25,6 +27,8 @@ class AnnonceService extends BaseService
     protected $service;
     protected $category;
     protected $mailer;
+    protected $twig;
+    protected $pdf;
     public const LICENCE_NULL = 'Cette Annonce ne dispose d\'aucune licence ';
    // protected $request;
     /**
@@ -32,13 +36,15 @@ class AnnonceService extends BaseService
      */
     public function __construct(EntityManagerInterface $_manager,
                                 ContainerInterface $_container, 
-                                Swift_Mailer $_mailer){
+                                Swift_Mailer $_mailer,
+                                Environment $_twig,
+                                Pdf $_pdf   ){
+
         $this->manager = $_manager;
         $this->container = $_container;
         $this->mailer = $_mailer;
-      //  parent::__construct();
-
-        //$this->request = $_request;
+        $this->twig = $_twig;
+        $this->pdf = $_pdf;
     }
 
     public function getRepository()
@@ -49,38 +55,34 @@ class AnnonceService extends BaseService
 
     public function checkAnnonce($_annonces = [])
     {
-
+        $isNew = false;
         $nativeService = $this->container->get('native.upload.service');
         $categoryService = $this->container->get('category.service');
         $licenceService = $this->container->get('licence.service');
         $mailerService = $this->container->get('mailer.service');
-        
-        $isNew = false;
-        
+        $providerService = $this->container->get('provider.service');
         $id = isset($_annonces['id']) ? $_annonces['id'] : '0';
         $title = $_annonces['Title'];
         $description = $_annonces['Description'];
         $content = $_annonces['Content'];
         $idCategory = $_annonces['category'];
         $idLicence = $_annonces['licence'];
-        //find Category by name
-        $category = $categoryService->findOneByID($idCategory);
-        $licence = $licenceService->findOneByID($idLicence);
-        
-        
-
-        //$coverImage = $_annonces['coverImage'];
-
+        $idProvider = $_annonces['provider'];
+        //find obj by id
+        $category = $categoryService->getById($idCategory);
+        $licence = $licenceService->getById($idLicence);
+        $provider = $providerService->getById($idProvider);
+        // dd($provider);
         if(empty($_annonces['id'])){
             $annonce = new Annonce();
             $curentUser =  $this->container->get('security.token_storage')->getToken()->getUser();
-
             $mailUser = 'rakotoarisondan@gmail.com';
             // $mailUser = $curentUser->getEmail();
             $mailAdmin = 'danielorak1@gmail.com';
+            //convert html to pdf
+            // $html = $this->twig->render('email/confirm-pdf.html.twig');
+            // $pdf  = $this->pdf->getOutputFromHtml($html);
            
-
-            
             //envoi mail vers l'admin sur un nouvel annonce
             $emailParameters = [
                                     'setTo' => $mailAdmin,
@@ -88,7 +90,9 @@ class AnnonceService extends BaseService
                                     'subject' => 'Nouvelle Annonce par un utilisateur',
                                     'template' => 'email/confirm.html.twig',
                                     'datas' => ['title' => $title,
-                                                'description' => $description]
+                                                'description' => $description
+                                               ],
+                                    //  'pdf'  => $pdf
                                     
             ];
             // dd($emailParameters);
@@ -120,33 +124,20 @@ class AnnonceService extends BaseService
         $annonce->setContent($content);
         $annonce->setCategory($category);
         $annonce->setLicence($licence);
+        $annonce->setProvider($provider);
        
         if(isset($_FILES['coverImage']) && !empty($_FILES['coverImage']['name']) > 0){
             $imageFullPath = $this->container->get('kernel')->getRootDir() . '/../public/uploads'."/".$this->container->getParameter('uploads_annonce_cover');
             $nativeService->makePath($imageFullPath);
-
             $filename = $nativeService->upload($imageFullPath,'coverImage');
-
-
             $annonce->setCoverImage($filename);
-            // dd($annonce);
             $this->save($annonce) ;
         }
-        //dd($annonce);
-        
         $this->manager->persist($annonce);
         $this->manager->flush();
 
-
-
-
     }
-    //prends les config
-    //test si il existe dejà un id = donbc edition
-    //si aucun on ajout un nouveau annnce
-    //save
-    
-
+ 
     /**
      * list all annonces 
      */

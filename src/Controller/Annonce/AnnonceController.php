@@ -27,33 +27,20 @@ class AnnonceController extends Controller
     public function new(Request $request): Response
     {
         $isEdit = false;
-
         $nativeFileUploader = $this->container->get('annonce.service');
-
         $annonce = new Annonce();
-        
-         $formAnnonce = $this->createForm(AnnonceType::class, $annonce);
-         $formAnnonce->handleRequest($request);
-
+        $formAnnonce = $this->createForm(AnnonceType::class, $annonce);
+        $formAnnonce->handleRequest($request);
         if ($formAnnonce->isSubmitted() && $formAnnonce->isValid()){
             $alls = $request->request->All();
             $annonces = $alls['annonce'] ;
-
             $nativeFileUploader->checkAnnonce($annonces);
+            $flashMessage =  $this->addFlash('success', 'ajout de l\'annonce avec avec success');
 
-
-           $flashMessage =  $this->addFlash('success', 'ajout de l\'annonce avec avec success');
-
-
-        // $manager = $this->getDoctrine()->getManager();
-        //      $manager->persist($annonce);
-        //  $manager->flush();
         return $this->redirectToRoute('home_bo',
                              ['flashMessage' => $flashMessage,]);
 
          }
-        
-
 
         return $this->render('bo/annonce/index.html.twig',
                              ['isEdit' => $isEdit,
@@ -92,7 +79,7 @@ class AnnonceController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'Enregistrement succès');
             
             return $this->redirectToRoute('home_bo');
-            // $this->addFlash('success', 'Mise à ajour de l\'annonce avec succès');
+            $this->addFlash('success', 'Mise à ajour de l\'annonce avec succès');
          }
         //$annonceService->checkAnnonce(['id' => $id]);
 

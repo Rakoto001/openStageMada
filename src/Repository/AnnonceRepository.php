@@ -102,7 +102,7 @@ class AnnonceRepository extends ServiceEntityRepository
      */
     public function orderBy($_query, $_limit)
     {
-        $_query->orderBy('a.id', 'ASC');
+        $_query->orderBy('a.id', 'DESC');
 
         return $_query;
 
