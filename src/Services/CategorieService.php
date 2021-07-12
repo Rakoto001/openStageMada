@@ -62,10 +62,13 @@ class CategorieService extends BaseService {
            
             //pour le status
             if( $status == 1){
-                
-                $renderStatus = '<p><span class="badge-dot badge-brand badge-success"></span> Activé</p>';
+                $renderStatus = '<a class="btn btn-sm articleStatus"  href="'. $this->generateUrl($categorie, 'status').'" id="10">
+                <i class="fa fa-circle fa-xs text-success"></i>&nbsp; Activé 
+            </a>';
             }else{
-                $renderStatus = '<p><span class="badge-dot badge-brand badge-success"></span> Desactivé</p>';
+                $renderStatus = '<a class="btn btn-sm articleStatus" id="9">
+                <i class="fa fa-circle fa-xs text-danger"></i>&nbsp; Désactivé
+            </a>';
 
             }
 
@@ -95,13 +98,14 @@ class CategorieService extends BaseService {
     public function generateUrl($_categorie, $_option )
     {
         $url = $this->container->get('router');
-
         if($_option == 'delete'){
-           
-            $urlAction = $url->generate('delete_category', ['id' => $_categorie->getId()]) ;
-        }else{
-        $urlAction = $url->generate('category_edit',['id' => $_categorie->getId()] );
+             $urlAction = $url->generate('delete_category', ['id' => $_categorie->getId()]) ;
+        }elseif($_option == 'edit'){
+            $urlAction = $url->generate('category_edit',['id' => $_categorie->getId()] );
+       }elseif($_option == 'status'){
+           $urlAction = $url->generate('category_status_change', ['id' => $_categorie->getId()] );
        }
+
         return $urlAction;
 
     }
@@ -200,11 +204,24 @@ class CategorieService extends BaseService {
      */
     public function listAll($_more)
     {
-        
         $listCategories = $this->getRepository()->findByStatus($_more);
         return $listCategories;
 
     }
+
+    /**
+     * change the status of categorie
+     */
+    public function changeStatus($_id)
+    {
+        $category = $this->getById($_id);
+        $category->setStatus(!$category->getStatus());
+        $this->save($category);
+
+        return $category;
+    }
+
+  
   
 
 

@@ -171,11 +171,16 @@ class CategoryRepository extends ServiceEntityRepository
 
    public function findCategoryActive($_status)
    {
-       $qb = $this->createQuery()
+     return  $qb = $this->createQuery()
 
                   ->andWhere('c.status = :status')
                   ->setParameter('status', $_status)
                   ->getQuery()
                   ->getResult();
+   }
+
+   public function reverseStatus()
+   {
+       
    }
 }

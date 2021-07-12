@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Category;
 
+use App\Services\CategorieService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -8,6 +9,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class CategoryAjaxController extends Controller{
+
+    private $categorieService;
+
+    public function __construct(CategorieService $_categorieService)
+    {
+        $this->categorieService = $_categorieService;
+    }
 
     /**
      * list category on datatable
@@ -48,6 +56,20 @@ class CategoryAjaxController extends Controller{
         $categoryService->delete($id);
 
          return new JsonResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/category/status/change", name="category_status_change")
+     */
+    public function changeActualStatue(Request $request)
+    {
+        $id = $request->query->get('id');
+        $this->categorieService->changeStatus($id);
+
+        $this->addFlash('success', 'tatus cahngé');
+        return $this->redirectToRoute('list_category');
     }
 
 }

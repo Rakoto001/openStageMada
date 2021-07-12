@@ -11,6 +11,7 @@ use App\Entity\Annonce;
 use App\Services\BaseService ;
 use Doctrine\ORM\Mapping\Entity;
 
+use App\Services\NativeUploaderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
@@ -29,6 +30,7 @@ class AnnonceService extends BaseService
     protected $mailer;
     protected $twig;
     protected $pdf;
+    protected $nativeServices;
     public const LICENCE_NULL = 'Cette Annonce ne dispose d\'aucune licence ';
    // protected $request;
     /**
@@ -38,13 +40,15 @@ class AnnonceService extends BaseService
                                 ContainerInterface $_container, 
                                 Swift_Mailer $_mailer,
                                 Environment $_twig,
-                                Pdf $_pdf   ){
+                                Pdf $_pdf,
+                                NativeUploaderService $_nativeServices   ){
 
         $this->manager = $_manager;
         $this->container = $_container;
         $this->mailer = $_mailer;
         $this->twig = $_twig;
         $this->pdf = $_pdf;
+        $this->nativeServices = $_nativeServices;
     }
 
     public function getRepository()
@@ -57,10 +61,12 @@ class AnnonceService extends BaseService
     {
         $isNew = false;
         $nativeService = $this->container->get('native.upload.service');
+    
         $categoryService = $this->container->get('category.service');
         $licenceService = $this->container->get('licence.service');
         $mailerService = $this->container->get('mailer.service');
         $providerService = $this->container->get('provider.service');
+
         $id = isset($_annonces['id']) ? $_annonces['id'] : '0';
         $title = $_annonces['Title'];
         $description = $_annonces['Description'];
@@ -128,13 +134,14 @@ class AnnonceService extends BaseService
        
         if(isset($_FILES['coverImage']) && !empty($_FILES['coverImage']['name']) > 0){
             $imageFullPath = $this->container->get('kernel')->getRootDir() . '/../public/uploads'."/".$this->container->getParameter('uploads_annonce_cover');
-            $nativeService->makePath($imageFullPath);
-            $filename = $nativeService->upload($imageFullPath,'coverImage');
+            $this->nativeServices->makePath($imageFullPath);
+            $filename = $this->nativeServices->upload($imageFullPath,'coverImage');
             $annonce->setCoverImage($filename);
+            dd($annonce);
             $this->save($annonce) ;
         }
-        $this->manager->persist($annonce);
-        $this->manager->flush();
+        // $this->manager->persist($annonce);
+        // $this->manager->flush();
 
     }
  
