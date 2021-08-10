@@ -7,6 +7,8 @@ Openstage description :
 -- to start safety first,run this command on your console :
 composer install
 
+-- create the fixtures by making command :
+php bin/console doctrine:fixtures:load
 
 -- you can  create a user admin by making command on your console :
 php bin/console admin:create
