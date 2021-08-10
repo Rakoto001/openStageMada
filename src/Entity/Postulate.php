@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=PostulateRepository::class)
+ * @ORM\HasLifecycleCallBacks()
  */
 class Postulate
 {
@@ -74,4 +75,29 @@ class Postulate
 
         return $this;
     }
+
+    
+    /**
+    * @ORM\PrePersist()
+    */
+   public function prePersistEvent()
+   {
+           if (!$this->createdAt) {
+                   $this->createdAt = new \DateTime();
+           }
+           if (!$this->createdAt) {
+                   $this->createdAt = new \DateTime();
+           }
+   }
+
+   /**
+    * @ORM\PreUpdate()
+    */
+    public function preUpdateEvent()
+    {
+            if (!$this->createdAt) {
+                    $this->createdAt = new \DateTime();
+            }
+    }
+
 }
